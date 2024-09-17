@@ -15,4 +15,8 @@ client = chromadb.Client()
 collection = client.create_collection(name="docs")
 
 for i, d in enumerate(documents):
-  response = ollama
+  response = ollama.embeddings(model="mxbai-embed-large", prompt=d)
+  embedding = response["embedding"]
+  collection.add(
+    ids=[str()]
+  )
