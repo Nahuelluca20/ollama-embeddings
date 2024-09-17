@@ -8,6 +8,7 @@ create a `venv`
 
 ```bash
 python -m venv ollama-vector-db
+ollama-vector-db\Scripts\activate
 ```
 
 install ollama and chromadb
