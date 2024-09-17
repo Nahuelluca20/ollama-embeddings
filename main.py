@@ -18,5 +18,33 @@ for i, d in enumerate(documents):
   response = ollama.embeddings(model="mxbai-embed-large", prompt=d)
   embedding = response["embedding"]
   collection.add(
-    ids=[str()]
+    ids=[str(i)],
+    embeddings=[embedding],
+    documents=[d]
   )
+
+# an example prompt
+prompt = "What animals are llamas related to?"
+
+# generate an embedding for the prompt and retrieve the most relevant doc
+response = ollama.embeddings(
+  prompt=prompt,
+  model="mxbai-embed-large"
+)
+
+# You can query the collection with a list of query texts, and Chroma will return the n most similar results.
+results = collection.query(
+  query_embeddings=[response["embedding"]],
+  n_results=1
+)
+
+# from results dict get document and element with index [0][0]
+data = results["documents"][0][0]
+
+# generate a response combining the prompt and data we retrieved in step 2
+output = ollama.generate(
+  model="llama3.1",
+  prompt=f"Using this data: {data}. Responde to this prompt: {prompt}"
+)
+
+print(output['response'])

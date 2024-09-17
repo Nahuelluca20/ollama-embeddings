@@ -17,3 +17,14 @@ pip install ollama
 pip install chromadb
 ```
 ````
+
+## Results
+
+````bash
+python main.py
+According to the provided information, llamas are related to:
+
+1. Vicuñas
+2. Camels
+```
+````
